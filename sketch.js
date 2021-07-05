@@ -11,8 +11,7 @@ function preload(){
 function setup(){
     canvas = createCanvas(800,600);
 
-    music.play();
-
+    
     //create 4 different surfaces
     plate1=createSprite(0,580,320,20);
     plate1.shapeColor="blue";
@@ -31,7 +30,8 @@ function setup(){
     //create box sprite and give velocity 
     ball=createSprite(random(20,750),120,40,40);
     ball.shapeColor="white"
-    ball.velocityY=4;
+    ball.velocityY=6;
+    ball.velocityX=4;
 }
 
 function draw() {
@@ -44,10 +44,15 @@ function draw() {
     //add condition to check if box touching surface and make it box
     if(plate1.isTouching(ball)&& ball.bounceOff(plate1)){
         ball.shapeColor="blue"
+        music.play();
     }
    
-    if(plate2.isTouching(ball)&& ball.bounceOff(plate2)){
-        ball.shapeColor="orange"
+    if(plate2.isTouching(ball)){
+        ball.shapeColor="orange";
+        ball.velocityX=0;
+        ball.velocityY=0;
+        music.stop();
+
     }
      
     if(plate3.isTouching(ball)&& ball.bounceOff(plate3)){
@@ -57,6 +62,8 @@ function draw() {
     if(plate4.isTouching(ball)&& ball.bounceOff(plate4)){
         ball.shapeColor="green"
     }
+
+    
 
 
     drawSprites();
